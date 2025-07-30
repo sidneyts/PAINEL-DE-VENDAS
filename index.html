@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4ll-E - Automatize seu Fluxo de Trabalho de Vídeo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para complementar o Tailwind */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0D0A0F; /* Um preto ainda mais profundo */
+            color: #F0F0F0;
+            overflow-x: hidden;
+        }
+
+        /* Classe para as animações de fade-in na rolagem */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Efeito de brilho sutil no fundo */
+        .radial-gradient-background {
+            background-image: radial-gradient(circle at 50% 30%, rgba(157, 78, 221, 0.15), transparent 40%);
+        }
+        
+        .radial-gradient-background-alt {
+             background-image: radial-gradient(circle at 50% 70%, rgba(157, 78, 221, 0.1), transparent 50%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Cabeçalho Fixo -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg border-b border-white/10">
+        <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <!-- Usando o novo ícone -->
+                <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-8 w-8 rounded-md">
+                <span class="text-xl font-bold text-white">W4ll-E</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="#features" class="text-gray-300 hover:text-white transition-colors">Funcionalidades</a>
+                <a href="#superled" class="text-gray-300 hover:text-white transition-colors">SUPERLED</a>
+                <a href="#precos" class="text-gray-300 hover:text-white transition-colors">Preços</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#comprar" class="bg-[#9D4EDD] text-white font-semibold py-2 px-5 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
+                    Comprar
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Seção 1: Herói -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center p-6 pt-24 radial-gradient-background fade-in-section">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-4xl">
+            A Sua Linha de Montagem de Vídeo Pessoal.
+        </h1>
+        <h2 class="text-5xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#9D4EDD] mt-2 mb-6">
+            Automatize, Padronize e Acelere.
+        </h2>
+        <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-300 mb-8">
+            Para motion designers, editores e agências. W4ll-E transforma a conversão de vídeos de uma tarefa manual para um fluxo de trabalho inteligente e à prova de erros.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#comprar" class="bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
+                Comprar Agora
+            </a>
+            <a href="#download" class="bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105">
+                Baixar Versão de Teste
+            </a>
+        </div>
+    </section>
+
+    <!-- Seção 2: Showcase do Conversor -->
+    <section id="features" class="py-20 lg:py-32 px-6 fade-in-section">
+        <div class="max-w-6xl mx-auto flex flex-col items-center">
+            <div class="w-full text-center mb-12">
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Cansado de renderizações sem fim?</h3>
+                <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-3xl mx-auto">Arraste centenas de vídeos. O W4ll-E processa tudo de uma vez, aplicando as suas regras e libertando o seu tempo.</p>
+            </div>
+            <div class="w-full max-w-5xl">
+                <!-- Usando a nova imagem principal do app -->
+                <img src="assets/IMG_APP.png" alt="Interface do conversor em lote do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 3: Showcase do Criador SUPERLED -->
+    <section id="superled" class="py-20 lg:py-32 px-6 radial-gradient-background-alt fade-in-section">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="text-center lg:text-left">
+                <span class="text-sm font-bold uppercase text-[#9D4EDD] tracking-wider">Projetos de Grande Formato</span>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight mt-2">Crie Video Walls Imersivos. Sem Esforço.</h3>
+                <p class="text-lg md:text-xl text-gray-400 mt-6">
+                    O Criador SUPERLED une vídeos de múltiplos painéis em uma única composição final, com opções de ajuste de duração por painel. Perfeito para shows, eventos e instalações.
+                </p>
+            </div>
+            <div class="w-full">
+                <!-- Assumindo que você salvará esta imagem como 'criador-superled.png' na pasta 'assets' -->
+                <img src="assets\criador-superled.png" alt="Interface do Criador SUPERLED do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seção 4: Showcase dos Perfis e Presets -->
+    <section class="py-20 lg:py-32 px-6 fade-in-section">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+             <div class="w-full lg:order-2">
+                <!-- Assumindo que você salvará esta imagem como 'perfis-presets.png' na pasta 'assets' -->
+                <img src="assets\perfis-presets.png" alt="Tela de gerenciamento de perfis e presets do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+            </div>
+            <div class="text-center lg:text-left lg:order-1">
+                <span class="text-sm font-bold uppercase text-[#9D4EDD] tracking-wider">Organização Total</span>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight mt-2">Um fluxo de trabalho à prova de erros.</h3>
+                <p class="text-lg md:text-xl text-gray-400 mt-6">
+                    Crie "Perfis" para cada cliente ou projeto, cada um com seus próprios presets. O W4ll-E ativa automaticamente apenas os presets compatíveis, prevenindo erros antes que aconteçam.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Script para animar seções na rolagem
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            // Adiciona a classe 'is-visible' à primeira seção imediatamente
+            if(sections.length > 0) {
+                sections[0].classList.add('is-visible');
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15 // A animação começa quando 15% da seção está visível
+            });
+
+            // Observa todas as seções, exceto a primeira
+            for (let i = 1; i < sections.length; i++) {
+                observer.observe(sections[i]);
+            }
+        });
+    </script>
+
+</body>
+</html>
