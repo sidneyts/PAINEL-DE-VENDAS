@@ -31,14 +31,38 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Efeito de brilho sutil no fundo */
         .radial-gradient-background {
             background-image: radial-gradient(circle at 50% 30%, rgba(157, 78, 221, 0.15), transparent 40%);
         }
-        
+
         .radial-gradient-background-alt {
              background-image: radial-gradient(circle at 50% 70%, rgba(157, 78, 221, 0.1), transparent 50%);
+        }
+
+        /* Estilo para botão desabilitado/loading */
+        .loading-button {
+            position: relative;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .loading-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1.25rem; /* 20px */
+            height: 1.25rem; /* 20px */
+            margin-top: -0.625rem; /* -10px */
+            margin-left: -0.625rem; /* -10px */
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -48,6 +72,7 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg border-b border-white/10">
         <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <!-- Certifique-se que o caminho para o ícone está correto -->
                 <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-8 w-8 rounded-md">
                 <span class="text-xl font-bold text-white">W4ll-E</span>
             </a>
@@ -58,7 +83,7 @@
                 <a href="#precos" class="text-gray-300 hover:text-white transition-colors">Preços</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="#comprar" class="bg-[#9D4EDD] text-white font-semibold py-2 px-5 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
+                <a href="#precos" class="bg-[#9D4EDD] text-white font-semibold py-2 px-5 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
                     Comprar
                 </a>
             </div>
@@ -78,11 +103,11 @@
                 Para motion designers, editores e agências. W4ll-E transforma a verificação de videos em uma tarefa automática e à prova de erros.
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#comprar" class="bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
+                <a href="#precos" class="bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
                     Comprar Agora
                 </a>
                 <!-- Link atualizado para a página de releases do GitHub -->
-                <a href="https://github.com/sidneyts/W4ll-E-Releases/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer" class="bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105">
+                <a href="https://github.com/sidneyts/W4ll-E-Releases/releases/latest" target="_blank" rel="noopener noreferrer" class="bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105">
                     Baixar Versão de Teste
                 </a>
             </div>
@@ -90,103 +115,151 @@
 
         <!-- Seção 2: Showcase do Conversor -->
         <section id="features" class="py-20 lg:py-32 px-6 fade-in-section">
-            <div class="max-w-6xl mx-auto flex flex-col items-center">
-                <div class="w-full text-center mb-12">
-                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Cansado de renderizações sem fim?</h3>
-                    <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-3xl mx-auto">Arraste centenas de vídeos. O W4ll-E processa e renomeia tudo de uma vez, aplicando as suas regras e libertando o seu tempo.</p>
-                </div>
-                <div class="w-full max-w-5xl">
-                    <img src="assets/IMG_APP.png" alt="Interface do conversor em lote do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção 3: Showcase do Criador SUPERLED -->
-        <section id="superled" class="py-20 lg:py-32 px-6 radial-gradient-background-alt fade-in-section">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="text-center lg:text-left">
-                    <span class="text-sm font-bold uppercase text-[#9D4EDD] tracking-wider">Projetos de Grande Formato</span>
-                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight mt-2">Crie combinações de videos para o L3D. Sem Esforço.</h3>
-                    <p class="text-lg md:text-xl text-gray-400 mt-6">
-                        O Criador SuperLed une vídeos de múltiplos painéis em uma única composição final, com opções de ajuste de duração por painel. Feito exclusivamente para Painel em C do Iguatemi Fortaleza-CE.
-                    </p>
-                </div>
-                <div class="w-full">
-                    <img src="assets/criador-superled.png" alt="Interface do Criador SUPERLED do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção 4: Showcase dos Perfis e Presets -->
-        <section class="py-20 lg:py-32 px-6 fade-in-section">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                 <div class="w-full lg:order-2">
-                    <img src="assets/perfis-presets.png" alt="Tela de gerenciamento de perfis e presets do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
-                </div>
-                <div class="text-center lg:text-left lg:order-1">
-                    <span class="text-sm font-bold uppercase text-[#9D4EDD] tracking-wider">Organização Total</span>
-                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight mt-2">Um fluxo de trabalho à prova de erros.</h3>
-                    <p class="text-lg md:text-xl text-gray-400 mt-6">
-                        Crie vários Perfis de presets, cada um para funcionalidade diferentes. O W4ll-E ativa automaticamente apenas os presets compatíveis, prevenindo erros antes que aconteçam.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção 5: GIF de Alívio Cômico -->
-        <section class="py-20 lg:py-32 px-6 fade-in-section">
-            <div class="max-w-4xl mx-auto text-center">
-                <h3 class="text-4xl md:text-5xl font-bold tracking-tight">E nos bastidores...</h3>
-                <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl mx-auto">O verdadeiro WAll-E, nosso funcionário do mês, garantindo que cada pixel seja perfeitamente compactado.</p>
-                <div class="mt-12 w-full aspect-video overflow-hidden rounded-2xl shadow-2xl shadow-purple-900/20">
-                    <img src="assets/VIDEO1.gif" alt="Animação divertida do robô W4ll-E" class="w-full h-full object-cover">
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção 6: Sobre o Criador -->
-        <section id="sobre" class="py-20 lg:py-32 px-6 radial-gradient-background-alt fade-in-section">
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
-                <div class="md:col-span-1 flex justify-center">
-                    <img src="assets/SIDNEY.png" alt="Foto do criador do W4ll-E" class="rounded-full h-48 w-48 md:h-56 md:w-56 object-cover border-4 border-purple-800/50">
-                </div>
-                <div class="md:col-span-2 text-center md:text-left">
-                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Feito por quem entende do assunto.</h3>
-                    <p class="text-lg text-gray-300 mt-6">
-                        "Como Motion Designer, eu passava horas em tarefas repetitivas formatando video por video manualmente. Criei o W4ll-E para resolver o meu próprio problema e devolver aos criadores o seu bem mais precioso: o tempo. Espero que ele transforme o seu fluxo de trabalho, assim como transformou o meu."
-                    </p>
-                    <p class="text-xl font-semibold text-white mt-6">- Sidney Teixeira, Criador do W4ll-E</p>
-                    <div class="flex justify-center md:justify-start items-center gap-6 mt-8">
-                        <a href="mailto:sidtsilva@gmail.com" title="Email" class="block w-8 h-8 transform hover:scale-110 transition-transform">
-                            <img src="assets/gmail.png" alt="Ícone do Gmail">
-                        </a>
-                        <a href="https://www.instagram.com/sidneytsilva_" target="_blank" rel="noopener noreferrer" title="Instagram" class="block w-8 h-8 transform hover:scale-110 transition-transform">
-                            <img src="assets/instagram.png" alt="Ícone do Instagram">
-                        </a>
-                        <a href="https://www.linkedin.com/in/sidneytsilva" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="block w-8 h-8 transform hover:scale-110 transition-transform">
-                           <img src="assets/linkedin.png" alt="Ícone do LinkedIn">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção de Preços (Placeholder) -->
-        <section id="precos" class="py-20 lg:py-32 px-6 fade-in-section">
-             <div class="max-w-4xl mx-auto text-center">
-                 <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Pronto para acelerar seu trabalho?</h3>
-                 <p class="text-lg md:text-xl text-gray-400 mt-4">Em breve: planos e preços.</p>
-                 <div id="comprar" class="mt-8">
-                    <!-- O botão de compra pode ser adicionado aqui quando os preços estiverem definidos -->
+             <div class="max-w-6xl mx-auto flex flex-col items-center">
+                 <div class="w-full text-center mb-12">
+                     <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Cansado de renderizações sem fim?</h3>
+                     <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-3xl mx-auto">Arraste centenas de vídeos. O W4ll-E processa e renomeia tudo de uma vez, aplicando as suas regras e libertando o seu tempo.</p>
+                 </div>
+                 <div class="w-full max-w-5xl">
+                     <!-- Certifique-se que o caminho para a imagem está correto -->
+                     <img src="assets/IMG_APP.png" alt="Interface do conversor em lote do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
                  </div>
              </div>
         </section>
 
+        <!-- Seção 3: Showcase do Criador SUPERLED -->
+        <section id="superled" class="py-20 lg:py-32 px-6 radial-gradient-background-alt fade-in-section">
+             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                 <div class="text-center lg:text-left">
+                     <span class="text-sm font-bold uppercase text-[#9D4EDD] tracking-wider">Projetos de Grande Formato</span>
+                     <h3 class="text-4xl md:text-5xl font-bold tracking-tight mt-2">Crie combinações de videos para o L3D. Sem Esforço.</h3>
+                     <p class="text-lg md:text-xl text-gray-400 mt-6">
+                         O Criador SuperLed une vídeos de múltiplos painéis em uma única composição final, com opções de ajuste de duração por painel. Feito exclusivamente para Painel em C do Iguatemi Fortaleza-CE.
+                     </p>
+                 </div>
+                 <div class="w-full">
+                     <!-- Certifique-se que o caminho para a imagem está correto -->
+                     <img src="assets/criador-superled.png" alt="Interface do Criador SUPERLED do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+                 </div>
+             </div>
+        </section>
+
+        <!-- Seção 4: Showcase dos Perfis e Presets -->
+        <section class="py-20 lg:py-32 px-6 fade-in-section">
+             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  <div class="w-full lg:order-2">
+                     <!-- Certifique-se que o caminho para a imagem está correto -->
+                     <img src="assets/perfis-presets.png" alt="Tela de gerenciamento de perfis e presets do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+                 </div>
+                 <div class="text-center lg:text-left lg:order-1">
+                     <span class="text-sm font-bold uppercase text-[#9D4EDD] tracking-wider">Organização Total</span>
+                     <h3 class="text-4xl md:text-5xl font-bold tracking-tight mt-2">Um fluxo de trabalho à prova de erros.</h3>
+                     <p class="text-lg md:text-xl text-gray-400 mt-6">
+                         Crie vários Perfis de presets, cada um para funcionalidade diferentes. O W4ll-E ativa automaticamente apenas os presets compatíveis, prevenindo erros antes que aconteçam.
+                     </p>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Seção 5: GIF de Alívio Cômico -->
+        <section class="py-20 lg:py-32 px-6 fade-in-section">
+             <div class="max-w-4xl mx-auto text-center">
+                 <h3 class="text-4xl md:text-5xl font-bold tracking-tight">E nos bastidores...</h3>
+                 <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl mx-auto">O verdadeiro WAll-E, nosso funcionário do mês, garantindo que cada pixel seja perfeitamente compactado.</p>
+                 <div class="mt-12 w-full aspect-video overflow-hidden rounded-2xl shadow-2xl shadow-purple-900/20">
+                     <!-- Certifique-se que o caminho para o GIF está correto -->
+                     <img src="assets/VIDEO1.gif" alt="Animação divertida do robô W4ll-E" class="w-full h-full object-cover">
+                 </div>
+             </div>
+        </section>
+
+        <!-- Seção 6: Sobre o Criador -->
+        <section id="sobre" class="py-20 lg:py-32 px-6 radial-gradient-background-alt fade-in-section">
+             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+                 <div class="md:col-span-1 flex justify-center">
+                     <!-- Certifique-se que o caminho para a imagem está correto -->
+                     <img src="assets/SIDNEY.png" alt="Foto do criador do W4ll-E" class="rounded-full h-48 w-48 md:h-56 md:w-56 object-cover border-4 border-purple-800/50">
+                 </div>
+                 <div class="md:col-span-2 text-center md:text-left">
+                     <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Feito por quem entende do assunto.</h3>
+                     <p class="text-lg text-gray-300 mt-6">
+                         "Como Motion Designer, eu passava horas em tarefas repetitivas formatando video por video manualmente. Criei o W4ll-E para resolver o meu próprio problema e devolver aos criadores o seu bem mais precioso: o tempo. Espero que ele transforme o seu fluxo de trabalho, assim como transformou o meu."
+                     </p>
+                     <p class="text-xl font-semibold text-white mt-6">- Sidney Teixeira, Criador do W4ll-E</p>
+                     <div class="flex justify-center md:justify-start items-center gap-6 mt-8">
+                         <!-- Certifique-se que os caminhos para os ícones estão corretos -->
+                         <a href="mailto:sidtsilva@gmail.com" title="Email" class="block w-8 h-8 transform hover:scale-110 transition-transform">
+                             <img src="assets/gmail.png" alt="Ícone do Gmail">
+                         </a>
+                         <a href="https://www.instagram.com/sidneytsilva_" target="_blank" rel="noopener noreferrer" title="Instagram" class="block w-8 h-8 transform hover:scale-110 transition-transform">
+                             <img src="assets/instagram.png" alt="Ícone do Instagram">
+                         </a>
+                         <a href="https://www.linkedin.com/in/sidneytsilva" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="block w-8 h-8 transform hover:scale-110 transition-transform">
+                            <img src="assets/linkedin.png" alt="Ícone do LinkedIn">
+                         </a>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- ===== INÍCIO DA ALTERAÇÃO: Seção de Preços Detalhada ===== -->
+        <section id="precos" class="py-20 lg:py-32 px-6 fade-in-section">
+            <div class="max-w-5xl mx-auto text-center">
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Escolha o plano ideal para você</h3>
+                <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto">Libere todo o potencial do W4ll-E e economize horas de trabalho manual.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Plano Vitalício -->
+                    <div class="bg-gradient-to-br from-gray-800/60 to-gray-900/70 border border-purple-700/50 rounded-2xl p-8 flex flex-col items-center shadow-xl shadow-purple-900/20 relative overflow-hidden">
+                        <span class="absolute top-4 right-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Mais Popular</span>
+                        <h4 class="text-2xl font-semibold mb-2 text-white">Licença Vitalícia</h4>
+                        <p class="text-gray-400 mb-6">Acesso completo para sempre.</p>
+                        <p class="text-5xl font-extrabold text-white mb-1">R$ 499</p>
+                        <p class="text-gray-400 mb-8">Pagamento único</p>
+                        <ul class="space-y-3 text-left text-gray-300 mb-10 w-full max-w-xs">
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Todas as funcionalidades</li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Atualizações futuras inclusas</li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Uso em um dispositivo</li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Suporte prioritário</li>
+                        </ul>
+                        <button
+                            data-price-id="price_LIFETIME_ID"
+                            class="buy-button w-full bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
+                            Comprar Agora
+                        </button>
+                    </div>
+
+                    <!-- Plano Mensal -->
+                    <div class="bg-gray-800/40 border border-gray-700/60 rounded-2xl p-8 flex flex-col items-center">
+                        <h4 class="text-2xl font-semibold mb-2 text-white">Assinatura Mensal</h4>
+                        <p class="text-gray-400 mb-6">Flexibilidade e acesso contínuo.</p>
+                        <p class="text-5xl font-extrabold text-white mb-1">R$ 29</p>
+                        <p class="text-gray-400 mb-8">por mês</p>
+                         <ul class="space-y-3 text-left text-gray-300 mb-10 w-full max-w-xs">
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Todas as funcionalidades</li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Atualizações enquanto ativo</li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Uso em um dispositivo</li>
+                            <li class="flex items-center gap-3"><svg class="w-5 h-5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Suporte padrão</li>
+                        </ul>
+                        <button
+                            data-price-id="price_MONTHLY_ID"
+                            class="buy-button w-full bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-500 transition-colors duration-300 transform hover:scale-105">
+                            Assinar Agora
+                        </button>
+                    </div>
+                </div>
+                 <p id="error-message" class="text-red-400 mt-8 text-sm" style="display: none;"></p>
+                 <p class="text-xs text-gray-500 mt-12">Os preços podem estar sujeitos a impostos locais. Pagamentos processados de forma segura pelo Stripe.</p>
+            </div>
+        </section>
+         <!-- ===== FIM DA ALTERAÇÃO ===== -->
+
     </main>
-    
+
     <!-- Rodapé -->
     <footer id="download" class="border-t border-white/10 mt-10">
         <div class="max-w-7xl mx-auto px-6 py-12 text-center text-gray-400">
+             <!-- Certifique-se que o caminho para o ícone está correto -->
             <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-12 w-12 rounded-lg mx-auto mb-4">
             <p class="font-semibold text-white text-lg">W4ll-E</p>
             <p class="mt-4">&copy; 2025 W4ll-E. Todos os direitos reservados.</p>
@@ -219,6 +292,105 @@
             for (let i = 1; i < sections.length; i++) {
                 observer.observe(sections[i]);
             }
+
+            // ===== INÍCIO DA ALTERAÇÃO: Lógica de Compra =====
+            const buyButtons = document.querySelectorAll('.buy-button');
+            const errorMessageElement = document.getElementById('error-message');
+            // Substitua pela URL real da sua Cloud Function quando fizer o deploy
+            const cloudFunctionUrl = 'URL_DA_SUA_CREATE_CHECKOUT_SESSION_FUNCTION'; // <-- IMPORTANTE: SUBSTITUA ISSO
+
+            // 1. Extrair o machineId da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const machineId = urlParams.get('mid');
+
+            if (!machineId) {
+                console.warn("Machine ID (mid) não encontrado nos parâmetros da URL.");
+                // Opcional: Desabilitar botões ou mostrar mensagem se o machineId for obrigatório
+                // buyButtons.forEach(button => button.disabled = true);
+                // errorMessageElement.textContent = "ID da máquina não encontrado. Abra esta página a partir do aplicativo W4ll-E.";
+                // errorMessageElement.style.display = 'block';
+            }
+
+            buyButtons.forEach(button => {
+                button.addEventListener('click', async () => {
+                    const priceId = button.dataset.priceId;
+                    errorMessageElement.style.display = 'none'; // Limpa erros anteriores
+                    button.classList.add('loading-button'); // Mostra indicador de loading
+                    button.disabled = true;
+
+                    if (!machineId) {
+                         errorMessageElement.textContent = "ID da máquina não encontrado. Abra esta página a partir do aplicativo W4ll-E.";
+                         errorMessageElement.style.display = 'block';
+                         button.classList.remove('loading-button');
+                         button.disabled = false;
+                         return; // Interrompe se não houver machineId
+                    }
+
+                    if (!priceId || priceId.includes('_ID')) {
+                         errorMessageElement.textContent = "Erro: ID do preço não configurado corretamente no botão.";
+                         errorMessageElement.style.display = 'block';
+                         button.classList.remove('loading-button');
+                         button.disabled = false;
+                         console.error("Price ID inválido ou placeholder:", priceId);
+                         return; // Interrompe se priceId for inválido
+                    }
+
+                    console.log(`Iniciando checkout para priceId: ${priceId} e machineId: ${machineId}`);
+
+                    try {
+                        const response = await fetch(cloudFunctionUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                priceId: priceId,
+                                machineId: machineId,
+                                // Envia as URLs de sucesso e cancelamento (relativas à página atual)
+                                successUrl: window.location.href + '?checkout=success', // Adiciona parâmetro para feedback
+                                cancelUrl: window.location.href + '?checkout=cancel',   // Adiciona parâmetro para feedback
+                            }),
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+                        }
+
+                        const session = await response.json();
+
+                        // Redireciona para a URL de checkout do Stripe
+                        if (session.url) {
+                            console.log("Redirecionando para:", session.url);
+                            window.location.href = session.url;
+                        } else {
+                            throw new Error("URL da sessão de checkout não recebida.");
+                        }
+
+                    } catch (error) {
+                        console.error('Erro ao criar sessão de checkout:', error);
+                        errorMessageElement.textContent = `Erro ao iniciar pagamento: ${error.message}. Tente novamente.`;
+                        errorMessageElement.style.display = 'block';
+                        button.classList.remove('loading-button');
+                        button.disabled = false;
+                    }
+                });
+            });
+
+             // Opcional: Mostrar mensagem de sucesso/cancelamento se redirecionado do Stripe
+             const checkoutStatus = urlParams.get('checkout');
+             if (checkoutStatus === 'success') {
+                 // Poderia mostrar uma mensagem mais elaborada
+                 alert("Pagamento concluído com sucesso! Sua licença será ativada em breve no aplicativo.");
+                 // Limpa o parâmetro da URL para evitar mostrar a mensagem novamente no refresh
+                 window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+             } else if (checkoutStatus === 'cancel') {
+                 // Poderia mostrar uma mensagem
+                 console.log("Checkout cancelado.");
+                 // Limpa o parâmetro da URL
+                 window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+             }
+            // ===== FIM DA ALTERAÇÃO =====
         });
     </script>
 
