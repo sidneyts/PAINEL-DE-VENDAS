@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- INÍCIO DA ALTERAÇÃO: Título da aba e Favicon -->
+    <!-- Título da aba e Favicon -->
     <title>W4ll-E</title>
     <link rel="icon" href="assets/icon.png" type="image/png">
-    <!-- FIM DA ALTERAÇÃO: Título da aba e Favicon -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,10 +108,8 @@
     <!-- Seção 1: Herói -->
     <main>
         <section class="min-h-screen flex flex-col items-center justify-center text-center p-6 pt-24 radial-gradient-background fade-in-section">
-            <div class="flex items-center justify-center gap-4 mb-40">
-                 <!-- INÍCIO DA ALTERAÇÃO: Tamanho do ícone -->
+             <div class="flex items-center justify-center gap-4 mb-4">
                  <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-24 w-24 md:h-32 md:w-32 rounded-lg">
-                 <!-- FIM DA ALTERAÇÃO: Tamanho do ícone -->
                  <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white">
                      W4ll-E
                  </h1>
@@ -126,11 +123,14 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#precos" class="bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
-                    Comprar Agora
+                    Comprar Licença <!-- Texto alterado -->
                 </a>
-                <a href="https://github.com/sidneyts/W4ll-E-Releases/releases/latest" target="_blank" rel="noopener noreferrer" class="bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105">
+                <!-- INÍCIO DA ALTERAÇÃO: Botão de Download Direto -->
+                <a id="download-button" href="#" download
+                   class="bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105">
                     Baixar Versão de Teste
                 </a>
+                <!-- FIM DA ALTERAÇÃO: Botão de Download Direto -->
             </div>
         </section>
 
@@ -238,7 +238,9 @@
                             data-price-id="price_1SL3xzDmHjuPzs0ccHHDk1CW"
                             class="buy-button mt-auto w-full bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105 flex items-center justify-center">
                              <div class="spinner"></div>
-                             <span class="button-text">Comprar Agora</span>
+                             <!-- INÍCIO DA ALTERAÇÃO: Texto do botão -->
+                             <span class="button-text">Comprar Licença</span>
+                             <!-- FIM DA ALTERAÇÃO: Texto do botão -->
                              <span class="sr-only">Processando...</span> <!-- Texto para leitores de tela -->
                         </button>
                     </div>
@@ -271,7 +273,7 @@
     </main>
 
     <!-- Rodapé -->
-    <footer id="download" class="border-t border-white/10 mt-10">
+    <footer id="download-footer" class="border-t border-white/10 mt-10"> <!-- ID adicionado -->
         <div class="max-w-7xl mx-auto px-6 py-12 text-center text-gray-400">
             <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-12 w-12 rounded-lg mx-auto mb-4">
             <p class="font-semibold text-white text-lg">W4ll-E</p>
@@ -282,29 +284,16 @@
 
 
     <script>
-        // Script para animar seções na rolagem
         document.addEventListener('DOMContentLoaded', () => {
+            // Script para animar seções na rolagem
             const sections = document.querySelectorAll('.fade-in-section');
-
-            // Adiciona a classe 'is-visible' à primeira seção imediatamente
-            if(sections.length > 0) {
-                sections[0].classList.add('is-visible');
-            }
-
+            if(sections.length > 0) sections[0].classList.add('is-visible');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
                 });
-            }, {
-                threshold: 0.1 // A animação começa quando 10% da seção está visível
-            });
-
-            // Observa todas as seções, exceto a primeira
-            for (let i = 1; i < sections.length; i++) {
-                observer.observe(sections[i]);
-            }
+            }, { threshold: 0.1 });
+            for (let i = 1; i < sections.length; i++) observer.observe(sections[i]);
 
             // --- Lógica de Compra ---
             const buyButtons = document.querySelectorAll('.buy-button');
@@ -312,91 +301,115 @@
             const successMessageElement = document.getElementById('success-message');
             const infoMessageElement = document.getElementById('info-message');
 
-            // Limpa mensagens ao carregar
             errorMessageElement.textContent = '';
             successMessageElement.textContent = '';
             infoMessageElement.textContent = '';
 
-
-            // Verifica se a compra foi cancelada (após redirecionamento do Stripe)
             const urlParams = new URLSearchParams(window.location.search);
              if (urlParams.get('checkout') === 'cancel') {
                  errorMessageElement.textContent = 'Compra cancelada.';
-                 // Limpa os parâmetros da URL
                  window.history.replaceState({}, document.title, window.location.pathname);
             }
-            // A mensagem de sucesso agora é tratada pela página thankyou.html
-
 
             buyButtons.forEach(button => {
                 button.addEventListener('click', async (event) => {
                     event.preventDefault();
                     const priceId = button.dataset.priceId;
-                    const buttonTextSpan = button.querySelector('.button-text'); // Seleciona o span do texto visível
+                    const buttonTextSpan = button.querySelector('.button-text');
                     const originalButtonText = buttonTextSpan ? buttonTextSpan.textContent : 'Comprar';
 
-                    // Verifica se o Price ID existe
                     if (!priceId) {
                          errorMessageElement.textContent = 'Erro: ID de preço não configurado no botão.';
                          console.error('Stripe Price ID não encontrado no atributo data-price-id do botão.');
                          return;
                     }
 
-                    // Define URLs de sucesso e cancelamento (aponte para esta mesma página ou thankyou.html)
                     const currentOrigin = window.location.origin;
-                    // Deriva a base path, removendo 'index.html' se presente
                     let basePath = window.location.pathname.replace(/index\.html$/, '');
-                    if (!basePath.endsWith('/')) {
-                        basePath += '/'; // Garante que termine com '/'
-                    }
-                    const successUrl = `${currentOrigin}${basePath}index.html`; // Passa index.html para a função trocar para thankyou.html
-                    const cancelUrl = `${currentOrigin}${basePath}index.html?checkout=cancel`; // Volta para index.html se cancelar
-
-                    // URL da sua Cloud Function
+                    if (!basePath.endsWith('/')) basePath += '/';
+                    const successUrl = `${currentOrigin}${basePath}index.html`;
+                    const cancelUrl = `${currentOrigin}${basePath}index.html?checkout=cancel`;
                     const cloudFunctionUrl = 'https://us-central1-w4lle-licenses.cloudfunctions.net/createCheckoutSession';
 
-                    errorMessageElement.textContent = ''; // Limpa erros anteriores
+                    errorMessageElement.textContent = '';
                     successMessageElement.textContent = '';
                     infoMessageElement.textContent = '';
                     button.classList.add('loading');
-                    if (buttonTextSpan) buttonTextSpan.textContent = ''; // Limpa o texto visível durante o loading
+                    if (buttonTextSpan) buttonTextSpan.textContent = '';
 
                     try {
                         const response = await fetch(cloudFunctionUrl, {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
+                            headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
                                 priceId: priceId,
-                                successUrl: successUrl, // Envia URL base para a função adaptar
+                                successUrl: successUrl,
                                 cancelUrl: cancelUrl
                             }),
                         });
-
                         if (!response.ok) {
                             const errorData = await response.json();
                             throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
                         }
-
                         const session = await response.json();
-
                         if (session.url) {
-                            console.log('Redirecionando para Stripe Checkout:', session.url);
-                            // Redireciona o usuário para a página de checkout do Stripe
                             window.location.href = session.url;
                         } else {
                             throw new Error('URL de checkout não recebida da função.');
                         }
-
                     } catch (error) {
                         console.error('Erro ao criar sessão de checkout:', error);
                         errorMessageElement.textContent = `Erro ao iniciar compra: ${error.message}`;
                         button.classList.remove('loading');
-                        if (buttonTextSpan) buttonTextSpan.textContent = originalButtonText; // Restaura texto do botão em caso de erro
+                        if (buttonTextSpan) buttonTextSpan.textContent = originalButtonText;
                     }
                 });
             });
+
+            // --- INÍCIO DA ALTERAÇÃO: Lógica de Download Direto ---
+            const downloadButton = document.getElementById('download-button');
+            if (downloadButton) {
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                const platform = navigator.platform;
+
+                const winUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.7/W4ll-E-Setup-1.0.7.exe";
+                const macIntelUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.7/W4ll-E-1.0.7.dmg";
+                const macArmUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.7/W4ll-E-1.0.7-arm64.dmg";
+                const defaultUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/latest"; // Fallback
+
+                let downloadUrl = defaultUrl; // Começa com o fallback
+
+                // Detecção do Windows
+                if (/Win/.test(platform)) {
+                    downloadUrl = winUrl;
+                }
+                // Detecção do macOS
+                else if (/Mac/.test(platform)) {
+                    // Tenta detectar ARM (Apple Silicon) - pode não ser 100% fiável em todos os browsers/versões
+                    // Usar navigator.userAgent é uma abordagem comum, mas não garantida.
+                    // A propriedade navigator.cpuArchitecture seria ideal, mas é experimental.
+                    if (/arm64|aarch64/i.test(navigator.userAgent)) { // Verifica se userAgent menciona ARM
+                         downloadUrl = macArmUrl;
+                         console.log("Detectado Mac ARM64");
+                    } else {
+                         // Assume Intel se não for ARM explicitamente
+                         downloadUrl = macIntelUrl;
+                         console.log("Detectado Mac Intel/x64");
+                    }
+                     // Poderíamos adicionar uma verificação mais robusta aqui se disponível no futuro
+                     // console.log("navigator.cpuArchitecture:", navigator.cpuArchitecture);
+                } else {
+                     console.log("Sistema operacional não detectado como Windows ou Mac, usando fallback.");
+                }
+
+                console.log("URL de download definida:", downloadUrl);
+                downloadButton.href = downloadUrl;
+
+                // O atributo 'download' já está no HTML, instruindo o browser a baixar.
+            } else {
+                console.error("Botão de download não encontrado!");
+            }
+            // --- FIM DA ALTERAÇÃO: Lógica de Download Direto ---
         });
     </script>
 
