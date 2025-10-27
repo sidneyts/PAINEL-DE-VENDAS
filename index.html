@@ -319,7 +319,7 @@
                     const originalButtonText = buttonTextSpan ? buttonTextSpan.textContent : 'Comprar';
 
                     // Placeholders - Substitua pelos seus IDs reais do Stripe!
-                    if (!priceId || priceId === 'price_LIFETIME_ID' || priceId === 'price_MONTHLY_ID') {
+                    if (!priceId || priceId === 'price_1SL3xzDmHjuPzs0ccHHDk1CW' || priceId === 'price_1SL3yUDmHjuPzs0cgUcXeuWk') {
                          errorMessageElement.textContent = 'Erro: IDs de preço não configurados corretamente.';
                          console.error('Stripe Price ID não encontrado ou é um placeholder:', priceId);
                          return;
@@ -331,8 +331,8 @@
                     const cancelUrl = `${currentUrl}?checkout=cancel`;
 
                     // URL da sua Cloud Function - Substitua!
-                    const cloudFunctionUrl = 'URL_DA_SUA_CREATE_CHECKOUT_SESSION_FUNCTION';
-                    if (cloudFunctionUrl === 'URL_DA_SUA_CREATE_CHECKOUT_SESSION_FUNCTION'){
+                    const cloudFunctionUrl = 'https://us-central1-w4lle-licenses.cloudfunctions.net/createCheckoutSession';
+                    if (cloudFunctionUrl === 'https://us-central1-w4lle-licenses.cloudfunctions.net/createCheckoutSession'){
                          errorMessageElement.textContent = 'Erro: URL da Cloud Function não configurada.';
                          console.error('URL da Cloud Function não configurada.');
                          return;
