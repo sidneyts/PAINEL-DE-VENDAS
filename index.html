@@ -123,14 +123,12 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#precos" class="bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
-                    Comprar Licença <!-- Texto alterado -->
+                    Comprar Licença
                 </a>
-                <!-- INÍCIO DA ALTERAÇÃO: Botão de Download Direto -->
                 <a id="download-button" href="#" download
                    class="bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105">
                     Baixar Versão de Teste
                 </a>
-                <!-- FIM DA ALTERAÇÃO: Botão de Download Direto -->
             </div>
         </section>
 
@@ -217,7 +215,7 @@
             </div>
         </section>
 
-        <!-- Seção de Preços (Atualizada) -->
+        <!-- Seção de Preços (Atualizada com IDs de PRODUÇÃO) -->
         <section id="precos" class="py-20 lg:py-32 px-6 fade-in-section">
             <div class="max-w-4xl mx-auto text-center">
                 <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Acelere seu fluxo de trabalho.</h3>
@@ -235,13 +233,11 @@
                             <li>✓ Suporte prioritário</li>
                         </ul>
                         <button
-                            data-price-id="price_1SL3xzDmHjuPzs0ccHHDk1CW"
+                            data-price-id="price_1SL4HBDmHjuPzs0cu4l776Pq"
                             class="buy-button mt-auto w-full bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105 flex items-center justify-center">
                              <div class="spinner"></div>
-                             <!-- INÍCIO DA ALTERAÇÃO: Texto do botão -->
                              <span class="button-text">Comprar Licença</span>
-                             <!-- FIM DA ALTERAÇÃO: Texto do botão -->
-                             <span class="sr-only">Processando...</span> <!-- Texto para leitores de tela -->
+                             <span class="sr-only">Processando...</span>
                         </button>
                     </div>
                     <!-- Plano Mensal -->
@@ -256,24 +252,24 @@
                             <li>✓ Suporte</li>
                         </ul>
                         <button
-                            data-price-id="price_1SL3yUDmHjuPzs0cgUcXeuWk"
+                            data-price-id="price_1SL4HUDmHjuPzs0cDN9p2kF7"
                             class="buy-button mt-auto w-full bg-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-500 transition-colors duration-300 transform hover:scale-105 flex items-center justify-center">
                              <div class="spinner"></div>
                              <span class="button-text">Assinar Agora</span>
-                             <span class="sr-only">Processando...</span> <!-- Texto para leitores de tela -->
+                             <span class="sr-only">Processando...</span>
                         </button>
                     </div>
                 </div>
-                <p id="error-message" class="text-red-400 mt-8 h-6"></p> <!-- Para exibir erros -->
-                <p id="success-message" class="text-green-400 mt-8 h-6"></p> <!-- Para exibir sucesso -->
-                <p id="info-message" class="text-blue-400 mt-8 h-6"></p> <!-- Para info (ex: chave enviada) -->
+                <p id="error-message" class="text-red-400 mt-8 h-6"></p>
+                <p id="success-message" class="text-green-400 mt-8 h-6"></p>
+                <p id="info-message" class="text-blue-400 mt-8 h-6"></p>
             </div>
         </section>
 
     </main>
 
     <!-- Rodapé -->
-    <footer id="download-footer" class="border-t border-white/10 mt-10"> <!-- ID adicionado -->
+    <footer id="download-footer" class="border-t border-white/10 mt-10">
         <div class="max-w-7xl mx-auto px-6 py-12 text-center text-gray-400">
             <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-12 w-12 rounded-lg mx-auto mb-4">
             <p class="font-semibold text-white text-lg">W4ll-E</p>
@@ -281,7 +277,6 @@
             <p class="text-sm mt-2">Feito para acelerar a criatividade.</p>
         </div>
     </footer>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -327,7 +322,9 @@
                     const currentOrigin = window.location.origin;
                     let basePath = window.location.pathname.replace(/index\.html$/, '');
                     if (!basePath.endsWith('/')) basePath += '/';
-                    const successUrl = `${currentOrigin}${basePath}index.html`;
+                    // URLs de sucesso e cancelamento mantêm-se como antes (apontando para index.html para cancelamento,
+                    // e a cloud function redireciona para thankyou.html no sucesso)
+                    const successUrl = `${currentOrigin}${basePath}index.html`; // A Cloud Function ajustará para thankyou.html
                     const cancelUrl = `${currentOrigin}${basePath}index.html?checkout=cancel`;
                     const cloudFunctionUrl = 'https://us-central1-w4lle-licenses.cloudfunctions.net/createCheckoutSession';
 
@@ -343,7 +340,7 @@
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
                                 priceId: priceId,
-                                successUrl: successUrl,
+                                successUrl: successUrl, // Envia URL base de sucesso
                                 cancelUrl: cancelUrl
                             }),
                         });
@@ -353,6 +350,7 @@
                         }
                         const session = await response.json();
                         if (session.url) {
+                            // Redireciona para o checkout do Stripe
                             window.location.href = session.url;
                         } else {
                             throw new Error('URL de checkout não recebida da função.');
@@ -366,7 +364,7 @@
                 });
             });
 
-            // --- INÍCIO DA ALTERAÇÃO: Lógica de Download Direto ---
+            // --- Lógica de Download Direto ---
             const downloadButton = document.getElementById('download-button');
             if (downloadButton) {
                 const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -375,29 +373,21 @@
                 const winUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.8/W4ll-E-Setup-1.0.8.exe";
                 const macIntelUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.8/W4ll-E-1.0.8.dmg";
                 const macArmUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.8/W4ll-E-1.0.8-arm64.dmg";
-                const defaultUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/latest"; // Fallback
+                const defaultUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/latest";
 
-                let downloadUrl = defaultUrl; // Começa com o fallback
+                let downloadUrl = defaultUrl;
 
-                // Detecção do Windows
                 if (/Win/.test(platform)) {
                     downloadUrl = winUrl;
                 }
-                // Detecção do macOS
                 else if (/Mac/.test(platform)) {
-                    // Tenta detectar ARM (Apple Silicon) - pode não ser 100% fiável em todos os browsers/versões
-                    // Usar navigator.userAgent é uma abordagem comum, mas não garantida.
-                    // A propriedade navigator.cpuArchitecture seria ideal, mas é experimental.
-                    if (/arm64|aarch64/i.test(navigator.userAgent)) { // Verifica se userAgent menciona ARM
+                    if (/arm64|aarch64/i.test(navigator.userAgent)) {
                          downloadUrl = macArmUrl;
                          console.log("Detectado Mac ARM64");
                     } else {
-                         // Assume Intel se não for ARM explicitamente
                          downloadUrl = macIntelUrl;
                          console.log("Detectado Mac Intel/x64");
                     }
-                     // Poderíamos adicionar uma verificação mais robusta aqui se disponível no futuro
-                     // console.log("navigator.cpuArchitecture:", navigator.cpuArchitecture);
                 } else {
                      console.log("Sistema operacional não detectado como Windows ou Mac, usando fallback.");
                 }
@@ -405,14 +395,11 @@
                 console.log("URL de download definida:", downloadUrl);
                 downloadButton.href = downloadUrl;
 
-                // O atributo 'download' já está no HTML, instruindo o browser a baixar.
             } else {
                 console.error("Botão de download não encontrado!");
             }
-            // --- FIM DA ALTERAÇÃO: Lógica de Download Direto ---
         });
     </script>
 
 </body>
 </html>
-
