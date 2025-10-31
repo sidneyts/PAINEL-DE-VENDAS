@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W4ll-E | Admin</title> <!-- Título da aba alterado -->
+    <!-- Caminho do Favicon corrigido (subindo um nível) -->
+    <link rel="icon" href="../assets/images/icon.png" type="image/png"> <!-- Favicon adicionado -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Adiciona ícones Heroicons para alertas -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/heroicons@1.0.6/outline/index.js"></script>
+    <style>
+        body { background-color: #1a0828; font-family: 'Inter', sans-serif; }
+        .aurora-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; filter: blur(150px) opacity(0.3); overflow: hidden; }
+        .aurora-shape { position: absolute; border-radius: 50%; }
+        .shape-1 { width: 45vw; height: 45vh; background-color: #7e22ce; top: -15%; left: -15%; }
+        .shape-2 { width: 50vw; height: 50vh; background-color: #5f0364; bottom: -10%; right: -20%; }
+        .card { background: linear-gradient(135deg, rgba(40, 25, 70, 0.5), rgba(30, 15, 50, 0.4)); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.15); }
+        .btn { background-image: linear-gradient(to right, #9333ea, #7e22ce); transition: all 0.2s ease-in-out; }
+        .btn:hover { transform: translateY(-px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }
+        .btn-danger { background-image: linear-gradient(to right, #e11d48, #be123c); }
+        .btn-secondary { background-image: linear-gradient(to right, #52525b, #3f3f46); }
+        .input-field, .select-field { background-color: rgba(255, 255, 255, 0.1); border: 2px solid transparent; transition: all 0.2s; color: white; padding: 0.5rem; border-radius: 0.5rem; }
+        .input-field:focus, .select-field:focus { outline: none; border-color: rgba(168, 85, 247, 0.7); background-color: rgba(255, 255, 255, 0.15); }
+        .select-field { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M6 9l4 4 4-4'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 0.5rem center; background-size: 1.5em 1.5em; padding-right: 2.5rem; }
+        .select-field option { background-color: #1a0828; }
+        .modal-overlay { background-color: rgba(12, 5, 20, 0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .copied-feedback { color: #4ade80 !important; transition: all 0.3s; }
+        /* Classes para Badges */
+        .badge { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 9999px; white-space: nowrap; }
+        .badge-purple { background-color: rgba(168, 85, 247, 0.2); color: #d8b4fe; }
+        .badge-blue { background-color: rgba(96, 165, 250, 0.2); color: #93c5fd; }
+        .badge-green { background-color: rgba(74, 222, 128, 0.2); color: #86efac; }
+        .badge-yellow { background-color: rgba(250, 204, 21, 0.2); color: #fde047; }
+        .badge-orange { background-color: rgba(251, 146, 60, 0.2); color: #fed7aa; }
+        .badge-red { background-color: rgba(248, 113, 113, 0.2); color: #fca5a5; }
+        .badge-gray { background-color: rgba(156, 163, 175, 0.2); color: #d1d5db; }
+        /* Ajuste na lista para mais espaço */
+        .license-item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; }
+        .license-details { display: flex; flex-direction: column; gap: 0.1rem; }
+        .license-actions { display: flex; align-items: center; gap: 0.75rem; }
+        .license-status-indicators { display: flex; align-items: center; gap: 0.5rem; }
+         .icon-sm { width: 1rem; height: 1rem; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="text-white">
+
+    <div class="aurora-background"><div class="aurora-shape shape-1"></div><div class="aurora-shape shape-2"></div></div>
+
+    <div id="app" class="relative min-h-screen flex items-center justify-center p-4">
+
+        <!-- TELA DE LOGIN -->
+        <div id="login-screen" class="w-full max-w-sm"><div class="card p-8 rounded-2xl shadow-2xl"><h1 class="text-2xl font-bold text-center mb-2">W4ll-E Admin</h1><p class="text-center text-sm text-white/60 mb-6">Acesso ao painel de licenças.</p><form id="login-form" class="space-y-4"><div><label for="login-email" class="text-sm font-medium text-white/80">Email</label><input type="email" id="login-email" required class="w-full input-field p-2 mt-1 rounded-lg"></div><div><label for="password" class="text-sm font-medium text-white/80">Senha</label><input type="password" id="login-password" required class="w-full input-field p-2 mt-1 rounded-lg"></div><button type="submit" class="w-full btn font-bold py-2 px-4 rounded-lg shadow-lg">Entrar</button><p id="login-error" class="text-red-400 text-xs text-center h-4"></p></form></div></div>
+
+        <!-- PAINEL DE ADMINISTRAÇÃO -->
+        <div id="admin-panel" class="hidden w-full max-w-5xl"><div class="card p-8 rounded-2xl shadow-2xl"><div class="flex justify-between items-center mb-6"><h1 class="text-2xl font-bold">Gestão de Licenças</h1><button id="logout-btn" class="text-sm font-semibold text-purple-300 hover:text-white transition">Sair</button></div><div class="space-y-8"><div id="generator-form" class="border-b border-white/10 pb-8"><h2 class="text-lg font-semibold mb-4">Criar Nova Licença Manual</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><input type="text" id="client-name" class="w-full input-field" placeholder="Nome do Cliente"><div><label class="text-sm font-medium text-white/80 block mb-1">Tipo de Licença</label><p class="w-full bg-black/20 p-2 rounded-lg text-white/70 text-sm">Manual - Vitalícia</p></div></div><button id="generate-btn" class="w-full mt-4 btn font-bold py-2 px-4 rounded-lg shadow-lg">Gerar Nova Licença Manual</button><div id="new-key-display" class="hidden mt-4"><p class="text-sm text-green-400 text-center" id="new-key-feedback">Licença criada com sucesso!</p><div class="mt-2 bg-black/30 p-4 rounded-lg text-center font-mono break-all cursor-pointer" id="new-key-value" title="Clique para copiar"></div></div></div><div><h2 class="text-lg font-semibold mb-4">Licenças Existentes</h2><input type="text" id="search-input" class="w-full input-field mb-4" placeholder="Pesquisar por cliente, chave ou email..."><div id="licenses-list" class="space-y-3 max-h-[60vh] overflow-y-auto pr-2"><p class="text-sm text-white/50 text-center">A carregar licenças...</p></div></div></div></div></div>
+        
+        <!-- MODAL DE EDIÇÃO -->
+        <div id="edit-modal" class="fixed inset-0 modal-overlay hidden items-center justify-center"><div class="card p-8 rounded-2xl shadow-2xl w-full max-w-md"><h2 class="text-xl font-bold mb-4">Editar Licença</h2><form id="edit-form"><input type="hidden" id="edit-license-id"><div class="mb-4"><label for="edit-client-name" class="text-sm font-medium text-white/80">Nome do Cliente</label><input type="text" id="edit-client-name" required class="w-full input-field mt-1"></div><div class="flex justify-end gap-4"><button type="button" id="cancel-edit-btn" class="btn btn-secondary font-bold py-2 px-4 rounded-lg">Cancelar</button><button type="submit" class="btn font-bold py-2 px-4 rounded-lg">Salvar</button></div></form></div></div>
+    </div>
+
+    <!-- O JavaScript permanece idêntico, não há necessidade de alterá-lo -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, setDoc, doc, updateDoc, serverTimestamp, query, onSnapshot, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // NOTA: Esta configuração do Firebase é lida pelo painel de admin. 
+        // Ela DEVE ser a mesma do seu projeto (w4lle-licenses).
+        const firebaseConfig = {
+            apiKey: "AIzaSyD2FjuLKgRYwLIpIkb5q1PvLjdlMqIsu8M",
+            authDomain: "w4lle-licenses.firebaseapp.com",
+            databaseURL: "https://w4lle-licenses-default-rtdb.firebaseio.com",
+            projectId: "w4lle-licenses",
+            storageBucket: "w4lle-licenses.firebasestorage.app",
+            messagingSenderId: "712636685993",
+            appId: "1:712636685993:web:d414b2128f2624b3f313b8",
+            measurementId: "G-1C6HTP3GKV"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const ui = {
+            loginScreen: document.getElementById('login-screen'),
+            adminPanel: document.getElementById('admin-panel'),
+            loginForm: document.getElementById('login-form'),
+            loginError: document.getElementById('login-error'),
+            logoutBtn: document.getElementById('logout-btn'),
+            generateBtn: document.getElementById('generate-btn'),
+            newKeyDisplay: document.getElementById('new-key-display'),
+            newKeyValue: document.getElementById('new-key-value'),
+            newKeyFeedback: document.getElementById('new-key-feedback'),
+            licensesList: document.getElementById('licenses-list'),
+            searchInput: document.getElementById('search-input'),
+            editModal: document.getElementById('edit-modal'),
+            editForm: document.getElementById('edit-form'),
+            cancelEditBtn: document.getElementById('cancel-edit-btn'),
+        };
+
+        let allLicenses = [];
+        let unsubscribe;
+
+        function generateLicenseKey() {
+            const part = () => Math.random().toString(36).substring(2, 6).toUpperCase();
+            return `W4LLE-${part()}-${part()}-${part()}-${part()}`;
+        }
+
+        function formatFirestoreTimestamp(timestamp) {
+            if (!timestamp || typeof timestamp.toDate !== 'function') {
+                return 'N/A';
+            }
+            const date = timestamp.toDate();
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        function renderLicenses(filter = '') {
+            const lowerFilter = filter.toLowerCase();
+            const filtered = allLicenses.filter(l => 
+                (l.clientName || '').toLowerCase().includes(lowerFilter) || 
+                (l.id || '').toLowerCase().includes(lowerFilter) ||
+                (l.userEmail || '').toLowerCase().includes(lowerFilter)
+            );
+
+            filtered.sort((a, b) => (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0));
+
+            ui.licensesList.innerHTML = '';
+            if (filtered.length === 0) {
+                ui.licensesList.innerHTML = `<p class="text-sm text-white/50 text-center">Nenhuma licença encontrada.</p>`;
+                return;
+            }
+
+            const now = new Date(); 
+
+            filtered.forEach(license => {
+                const item = document.createElement('div');
+                item.className = 'bg-white/5 p-4 rounded-lg license-item text-sm';
+
+                const licenseType = license.licenseType || 'lifetime'; 
+                const typeText = licenseType === 'lifetime' ? 'Vitalícia' : (licenseType === 'subscription' ? 'Mensal' : 'Manual');
+                const typeClass = licenseType === 'lifetime' ? 'badge-purple' : (licenseType === 'subscription' ? 'badge-blue' : 'badge-gray');
+
+                let statusBadgeHtml = '';
+                let warningIconHtml = '';
+                let expiryDateHtml = '';
+
+                let statusText = license.status || 'unknown';
+                let statusClass = 'badge-gray';
+                switch (statusText) {
+                    case 'available': statusText = 'Disponível'; statusClass = 'badge-green'; break;
+                    case 'active': statusText = 'Ativa'; statusClass = 'badge-yellow'; break;
+                    case 'revoked': statusText = 'Revogada'; statusClass = 'badge-red'; break;
+                    case 'canceled': statusText = 'Cancelada'; statusClass = 'badge-red'; break; 
+                }
+                 const generalStatusBadge = `<span class="badge ${statusClass}">${statusText}</span>`;
+
+                if (licenseType === 'subscription') {
+                    const subStatus = license.subscriptionStatus || 'unknown';
+                    let subStatusText = subStatus;
+                    let subStatusClass = 'badge-gray';
+                    switch (subStatus) {
+                        case 'active': subStatusText = 'Pgmto OK'; subStatusClass = 'badge-green'; break;
+                        case 'past_due': subStatusText = 'Pgmto Pendente'; subStatusClass = 'badge-orange'; break;
+                        case 'canceled': subStatusText = 'Cancelada'; subStatusClass = 'badge-red'; break;
+                    }
+                    statusBadgeHtml += `<span class="badge ${subStatusClass}">${subStatusText}</span>`;
+
+                    if (license.expiresAt) {
+                        const expiryDate = license.expiresAt.toDate();
+                        const formattedExpiry = formatFirestoreTimestamp(license.expiresAt);
+                        expiryDateHtml = `<span class="text-xs text-white/60">Expira: ${formattedExpiry}</span>`;
+                        if (expiryDate < now || subStatus === 'past_due') {
+                             warningIconHtml = `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-400 icon-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" title="Pagamento pendente ou assinatura expirada"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /> </svg>`;
+                        }
+                    }
+                }
+
+                item.innerHTML = `
+                    <div class="license-details">
+                        <p class="font-semibold text-base">${license.clientName || 'Sem Nome'}</p>
+                        <p class="font-mono text-xs text-purple-300 cursor-pointer transition-colors license-key-copy" title="Clique para copiar" data-key="${license.id}">${license.id}</p>
+                        ${license.userEmail ? `<p class="text-xs text-white/60">${license.userEmail}</p>` : ''}
+                        ${expiryDateHtml}
+                    </div>
+                    <div class="license-actions">
+                         <div class="license-status-indicators">
+                            ${warningIconHtml}
+                            <span class="badge ${typeClass}">${typeText}</span>
+                            ${generalStatusBadge}
+                            ${statusBadgeHtml}
+                         </div>
+                        <div class="flex gap-2">
+                           <button data-action="edit" data-id="${license.id}" class="text-blue-400 hover:text-white transition text-xs font-medium">Editar</button>
+                           <button data-action="toggle-status" data-id="${license.id}" data-status="${license.status}" class="${license.status === 'revoked' || license.status === 'canceled' ? 'text-green-400' : 'text-red-400'} hover:text-white transition text-xs font-medium">${license.status === 'revoked' || license.status === 'canceled' ? 'Reativar' : 'Revogar'}</button>
+                        </div>
+                    </div>
+                `;
+                ui.licensesList.appendChild(item);
+            });
+        }
+        
+        function setupRealtimeListener() {
+            if (unsubscribe) unsubscribe();
+            const q = query(collection(db, 'licenses'));
+            unsubscribe = onSnapshot(q, (querySnapshot) => {
+                allLicenses = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderLicenses(ui.searchInput.value);
+            }, (error) => {
+                console.error("Erro ao ouvir licenças:", error);
+                ui.licensesList.innerHTML = `<p class="text-sm text-red-400 text-center">Erro ao carregar licenças.</p>`;
+            });
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                ui.loginScreen.classList.add('hidden');
+                ui.adminPanel.classList.remove('hidden');
+                setupRealtimeListener();
+            } else {
+                ui.loginScreen.classList.remove('hidden');
+                ui.adminPanel.classList.add('hidden');
+                if (unsubscribe) unsubscribe();
+            }
+        });
+
+        ui.loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            ui.loginError.textContent = '';
+            signInWithEmailAndPassword(auth, email, password)
+              .catch(err => {
+                console.error("Erro de login:", err);
+                ui.loginError.textContent = "Email ou senha inválidos.";
+              });
+        });
+
+        ui.logoutBtn.addEventListener('click', () => signOut(auth));
+        
+        ui.generateBtn.addEventListener('click', async () => {
+            const clientName = document.getElementById('client-name').value.trim();
+            if (!clientName) {
+                const clientInput = document.getElementById('client-name');
+                clientInput.classList.add('border-red-500');
+                clientInput.placeholder = 'Nome do cliente é obrigatório';
+                setTimeout(() => {
+                    clientInput.classList.remove('border-red-500');
+                    clientInput.placeholder = 'Nome do Cliente';
+                }, 2000);
+                return;
+            }
+            
+            const newKey = generateLicenseKey();
+            
+            ui.generateBtn.disabled = true;
+            ui.generateBtn.textContent = 'A gerar...';
+
+            const dataToSave = {
+                clientName: clientName,
+                status: 'available',
+                createdAt: serverTimestamp(),
+                licenseType: "manual_lifetime", 
+                userEmail: null, 
+                stripeCustomerId: null,
+                stripeSubscriptionId: null,
+                subscriptionStatus: null,
+                expiresAt: null
+            };
+            
+            try {
+                await setDoc(doc(db, "licenses", newKey), dataToSave); 
+                
+                ui.newKeyValue.textContent = newKey;
+                ui.newKeyFeedback.textContent = 'Licença manual criada com sucesso!';
+                ui.newKeyFeedback.classList.remove('text-red-400');
+                ui.newKeyFeedback.classList.add('text-green-400');
+                ui.newKeyDisplay.classList.remove('hidden');
+            } catch (error) {
+                console.error("Erro ao criar licença manual:", error);
+                ui.newKeyFeedback.textContent = 'Erro ao criar a licença manual.';
+                ui.newKeyFeedback.classList.remove('text-green-400');
+                ui.newKeyFeedback.classList.add('text-red-400');
+                ui.newKeyDisplay.classList.remove('hidden');
+            } finally {
+                ui.generateBtn.disabled = false;
+                ui.generateBtn.textContent = 'Gerar Nova Licença Manual';
+                document.getElementById('client-name').value = '';
+            }
+        });
+
+        ui.newKeyValue.addEventListener('click', () => {
+            const keyToCopy = ui.newKeyValue.textContent;
+            if (!keyToCopy || !keyToCopy.startsWith('W4LLE-')) return;
+
+            const originalKey = ui.newKeyValue.textContent;
+            const originalFeedback = ui.newKeyFeedback.textContent;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = keyToCopy;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if(successful) {
+                    ui.newKeyValue.textContent = 'Copiado!';
+                    ui.newKeyFeedback.textContent = 'Chave copiada para a área de transferência!';
+                    ui.newKeyFeedback.classList.add('copied-feedback');
+                    
+                    setTimeout(() => {
+                        ui.newKeyValue.textContent = originalKey;
+                        ui.newKeyFeedback.textContent = originalFeedback;
+                        ui.newKeyFeedback.classList.remove('copied-feedback');
+                    }, 2000);
+                } else {
+                     throw new Error('Falha ao usar document.execCommand');
+                }
+            } catch (err) {
+                console.error('Erro ao copiar nova chave:', err);
+                ui.newKeyFeedback.textContent = 'Erro ao copiar. Tente manually.';
+                ui.newKeyFeedback.classList.add('text-red-400');
+                alert(`Não foi possível copiar automaticamente. Copie manualmente: ${keyToCopy}`);
+            } finally {
+                 document.body.removeChild(tempTextArea);
+            }
+        });
+
+        ui.searchInput.addEventListener('input', (e) => renderLicenses(e.target.value));
+
+        ui.licensesList.addEventListener('click', async (e) => {
+            
+            const keyElement = e.target.closest('.license-key-copy');
+            if (keyElement) {
+                const key = keyElement.dataset.key;
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = key;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+
+                try {
+                     const successful = document.execCommand('copy');
+                     if(successful) {
+                        const originalText = keyElement.textContent;
+                        keyElement.textContent = 'Copiado!';
+                        keyElement.classList.add('copied-feedback');
+                        setTimeout(() => {
+                            keyElement.textContent = originalText;
+                            keyElement.classList.remove('copied-feedback');
+                        }, 1500);
+                     } else {
+                         throw new Error('Falha ao usar document.execCommand');
+                     }
+                } catch (err) {
+                    console.error('Erro ao copiar:', err);
+                    keyElement.textContent = 'Erro!';
+                    setTimeout(() => { keyElement.textContent = key; }, 1500);
+                    alert(`Não foi possível copiar automaticamente. Copie manualmente: ${key}`);
+                } finally {
+                    document.body.removeChild(tempTextArea);
+                }
+                return; 
+            }
+
+            const target = e.target;
+            const action = target.dataset.action;
+            const id = target.dataset.id;
+            if (!action || !id) return;
+            
+            const licenseRef = doc(db, 'licenses', id);
+
+            if (action === 'edit') {
+                const license = allLicenses.find(l => l.id === id);
+                if (license) {
+                    document.getElementById('edit-license-id').value = id;
+                    document.getElementById('edit-client-name').value = license.clientName || ''; 
+                    ui.editModal.classList.remove('hidden');
+                    ui.editModal.classList.add('flex');
+                }
+            } else if (action === 'toggle-status') {
+                const currentStatus = target.dataset.status;
+                const licenseData = allLicenses.find(l => l.id === id);
+                const isSubscription = licenseData?.licenseType === 'subscription';
+                
+                let newStatus;
+                let confirmationMessage;
+
+                if (currentStatus === 'revoked' || currentStatus === 'canceled') {
+                     newStatus = isSubscription ? 'active' : 'available'; 
+                     confirmationMessage = `Tem a certeza que deseja REATIVAR esta licença para o status '${newStatus}'?`;
+                } else {
+                     newStatus = 'revoked'; 
+                     confirmationMessage = `Tem a certeza que deseja REVOGAR esta licença?`;
+                }
+                
+                if (confirm(confirmationMessage)) {
+                    try {
+                         const updateData = { status: newStatus };
+                        await updateDoc(licenseRef, updateData);
+                    } catch(err) {
+                        console.error("Erro ao atualizar status:", err);
+                        alert('Erro ao atualizar o status da licença.'); 
+                    }
+                }
+            }
+        });
+
+        ui.editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('edit-license-id').value;
+            const newClientName = document.getElementById('edit-client-name').value.trim(); 
+             if (!id || !newClientName) {
+                 alert('Nome do cliente não pode estar vazio.');
+                 return;
+             }
+            try {
+                await updateDoc(doc(db, 'licenses', id), { clientName: newClientName });
+                ui.editModal.classList.add('hidden');
+                ui.editModal.classList.remove('flex');
+            } catch(err) {
+                console.error("Erro ao salvar:", err);
+                alert('Erro ao salvar as alterações.'); 
+            }
+        });
+
+        ui.cancelEditBtn.addEventListener('click', () => {
+            ui.editModal.classList.add('hidden');
+            ui.editModal.classList.remove('flex');
+        });
+    </script>
+</body>
+</html>

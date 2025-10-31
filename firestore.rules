@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    // A coleção 'licenses' só pode ser lida e escrita por usuários autenticados (admin).
+    // Isso protege os dados dos seus clientes de acesso público.
+    match /licenses/{licenseId} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Regra de negação padrão: Nega acesso a todas as outras coleções
+    // (a menos que você adicione regras específicas para elas).
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

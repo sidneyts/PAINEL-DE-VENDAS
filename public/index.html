@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Título da aba e Favicon -->
+    <!-- Título da aba e Favicon (caminho corrigido) -->
     <title>W4ll-E</title>
-    <link rel="icon" href="assets/icon.png" type="image/png">
+    <link rel="icon" href="assets/images/icon.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,6 +75,14 @@
         .buy-button .button-text { /* Classe para o texto visível */
              display: inline-block;
         }
+        
+        /* Estilo para botão de download desabilitado */
+        .download-button.disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+            background-color: #4b5563; /* Cinza mais escuro */
+            border-color: #374151;
+        }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
@@ -88,7 +96,8 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg border-b border-white/10">
         <nav class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-8 w-8 rounded-md">
+                <!-- Caminho corrigido -->
+                <img src="assets/images/icon.png" alt="Ícone do W4ll-E" class="h-8 w-8 rounded-md">
                 <span class="text-xl font-bold text-white">W4ll-E</span>
             </a>
             <div class="hidden md:flex items-center gap-6">
@@ -101,6 +110,10 @@
                 <a href="#precos" class="bg-[#9D4EDD] text-white font-semibold py-2 px-5 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
                     Comprar
                 </a>
+                <!-- Link para o painel de admin (caminho simplificado) -->
+                <a href="/admin" class="text-gray-400 text-sm font-medium hover:text-white transition-colors">
+                    Admin
+                </a>
             </div>
         </nav>
     </header>
@@ -109,7 +122,8 @@
     <main>
         <section class="min-h-screen flex flex-col items-center justify-center text-center p-6 pt-24 radial-gradient-background fade-in-section">
              <div class="flex items-center justify-center gap-4 mb-40">
-                 <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-24 w-24 md:h-32 md:w-32 rounded-lg">
+                 <!-- Caminho corrigido -->
+                 <img src="assets/images/icon.png" alt="Ícone do W4ll-E" class="h-24 w-24 md:h-32 md:w-32 rounded-lg">
                  <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white">
                      W4ll-E
                  </h1>
@@ -125,11 +139,13 @@
                 <a href="#precos" class="bg-[#9D4EDD] text-white font-semibold py-3 px-8 rounded-lg hover:bg-[#8b44c4] transition-colors duration-300 transform hover:scale-105">
                     Comprar Licença
                 </a>
-                <a id="download-button" href="#" download
-                   class="bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105">
+                <!-- Botão de Download (agora controlado por JS) -->
+                <a id="download-button" href="#"
+                   class="download-button bg-gray-700/50 border border-gray-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-700/80 transition-colors duration-300 transform hover:scale-105 disabled">
                     Baixar Versão de Teste
                 </a>
             </div>
+            <p id="download-error" class="text-red-400 text-sm mt-4 h-4"></p>
         </section>
 
         <!-- Seção 2: Showcase do Conversor -->
@@ -140,7 +156,8 @@
                     <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-3xl mx-auto">Arraste centenas de vídeos. O W4ll-E processa e renomeia tudo de uma vez, aplicando as suas regras e libertando o seu tempo.</p>
                 </div>
                 <div class="w-full max-w-5xl">
-                    <img src="assets/IMG_APP.png" alt="Interface do conversor em lote do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+                    <!-- Caminho corrigido -->
+                    <img src="assets/images/IMG_APP.png" alt="Interface do conversor em lote do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
                 </div>
             </div>
         </section>
@@ -156,7 +173,8 @@
                     </p>
                 </div>
                 <div class="w-full">
-                    <img src="assets/criador-superled.png" alt="Interface do Criador SUPERLED do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+                    <!-- Caminho corrigido -->
+                    <img src="assets/images/criador-superled.png" alt="Interface do Criador SUPERLED do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
                 </div>
             </div>
         </section>
@@ -165,7 +183,8 @@
         <section class="py-20 lg:py-32 px-6 fade-in-section">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                  <div class="w-full lg:order-2">
-                    <img src="assets/perfis-presets.png" alt="Tela de gerenciamento de perfis e presets do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
+                    <!-- Caminho corrigido -->
+                    <img src="assets/images/perfis-presets.png" alt="Tela de gerenciamento de perfis e presets do W4ll-E" class="rounded-2xl shadow-2xl shadow-purple-900/20 w-full">
                 </div>
                 <div class="text-center lg:text-left lg:order-1">
                     <span class="text-sm font-bold uppercase text-[#9D4EDD] tracking-wider">Organização Total</span>
@@ -183,7 +202,8 @@
                 <h3 class="text-4xl md:text-5xl font-bold tracking-tight">E nos bastidores...</h3>
                 <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-2xl mx-auto">O verdadeiro WAll-E, nosso funcionário do mês, garantindo que cada pixel seja perfeitamente compactado.</p>
                 <div class="mt-12 w-full aspect-video overflow-hidden rounded-2xl shadow-2xl shadow-purple-900/20">
-                    <img src="assets/VIDEO1.gif" alt="Animação divertida do robô W4ll-E" class="w-full h-full object-cover">
+                    <!-- Caminho corrigido -->
+                    <img src="assets/images/VIDEO1.gif" alt="Animação divertida do robô W4ll-E" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
@@ -192,7 +212,8 @@
         <section id="sobre" class="py-20 lg:py-32 px-6 radial-gradient-background-alt fade-in-section">
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
                 <div class="md:col-span-1 flex justify-center">
-                    <img src="assets/SIDNEY.png" alt="Foto do criador do W4ll-E" class="rounded-full h-48 w-48 md:h-56 md:w-56 object-cover border-4 border-purple-800/50">
+                    <!-- Caminho corrigido -->
+                    <img src="assets/images/SIDNEY.png" alt="Foto do criador do W4ll-E" class="rounded-full h-48 w-48 md:h-56 md:w-56 object-cover border-4 border-purple-800/50">
                 </div>
                 <div class="md:col-span-2 text-center md:text-left">
                     <h3 class="text-4xl md:text-5xl font-bold tracking-tight">Feito por quem entende do assunto.</h3>
@@ -201,14 +222,15 @@
                     </p>
                     <p class="text-xl font-semibold text-white mt-6">- Sidney Teixeira, Criador do W4ll-E</p>
                     <div class="flex justify-center md:justify-start items-center gap-6 mt-8">
+                        <!-- Caminhos corrigidos -->
                         <a href="mailto:sidtsilva@gmail.com" title="Email" class="block w-8 h-8 transform hover:scale-110 transition-transform">
-                            <img src="assets/gmail.png" alt="Ícone do Gmail">
+                            <img src="assets/icons/gmail.png" alt="Ícone do Gmail">
                         </a>
                         <a href="https://www.instagram.com/sidneytsilva_" target="_blank" rel="noopener noreferrer" title="Instagram" class="block w-8 h-8 transform hover:scale-110 transition-transform">
-                            <img src="assets/instagram.png" alt="Ícone do Instagram">
+                            <img src="assets/icons/instagram.png" alt="Ícone do Instagram">
                         </a>
                         <a href="https://www.linkedin.com/in/sidneytsilva" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="block w-8 h-8 transform hover:scale-110 transition-transform">
-                           <img src="assets/linkedin.png" alt="Ícone do LinkedIn">
+                           <img src="assets/icons/linkedin.png" alt="Ícone do LinkedIn">
                         </a>
                     </div>
                 </div>
@@ -271,7 +293,8 @@
     <!-- Rodapé -->
     <footer id="download-footer" class="border-t border-white/10 mt-10">
         <div class="max-w-7xl mx-auto px-6 py-12 text-center text-gray-400">
-            <img src="assets/icon.png" alt="Ícone do W4ll-E" class="h-12 w-12 rounded-lg mx-auto mb-4">
+            <!-- Caminho corrigido -->
+            <img src="assets/images/icon.png" alt="Ícone do W4ll-E" class="h-12 w-12 rounded-lg mx-auto mb-4">
             <p class="font-semibold text-white text-lg">W4ll-E</p>
             <p class="mt-4">&copy; 2025 W4ll-E. Todos os direitos reservados.</p>
             <p class="text-sm mt-2">Feito para acelerar a criatividade.</p>
@@ -290,7 +313,7 @@
             }, { threshold: 0.1 });
             for (let i = 1; i < sections.length; i++) observer.observe(sections[i]);
 
-            // --- Lógica de Compra ---
+            // --- Lógica de Compra (sem alterações) ---
             const buyButtons = document.querySelectorAll('.buy-button');
             const errorMessageElement = document.getElementById('error-message');
             const successMessageElement = document.getElementById('success-message');
@@ -322,9 +345,10 @@
                     const currentOrigin = window.location.origin;
                     let basePath = window.location.pathname.replace(/index\.html$/, '');
                     if (!basePath.endsWith('/')) basePath += '/';
-                    // URLs de sucesso e cancelamento mantêm-se como antes (apontando para index.html para cancelamento,
-                    // e a cloud function redireciona para thankyou.html no sucesso)
-                    const successUrl = `${currentOrigin}${basePath}index.html`; // A Cloud Function ajustará para thankyou.html
+                    
+                    // O successUrl permanece o mesmo (apontando para index.html ou a raiz)
+                    // A Cloud Function agora redireciona corretamente para thankyou.html
+                    const successUrl = `${currentOrigin}${basePath}`; 
                     const cancelUrl = `${currentOrigin}${basePath}index.html?checkout=cancel`;
                     const cloudFunctionUrl = 'https://us-central1-w4lle-licenses.cloudfunctions.net/createCheckoutSession';
 
@@ -340,7 +364,7 @@
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
                                 priceId: priceId,
-                                successUrl: successUrl, // Envia URL base de sucesso
+                                successUrl: successUrl, // Envia URL base
                                 cancelUrl: cancelUrl
                             }),
                         });
@@ -350,7 +374,6 @@
                         }
                         const session = await response.json();
                         if (session.url) {
-                            // Redireciona para o checkout do Stripe
                             window.location.href = session.url;
                         } else {
                             throw new Error('URL de checkout não recebida da função.');
@@ -364,37 +387,82 @@
                 });
             });
 
-            // --- Lógica de Download Direto ---
+            // --- NOVA LÓGICA: Download Dinâmico ---
             const downloadButton = document.getElementById('download-button');
+            const downloadError = document.getElementById('download-error');
+            const githubApiUrl = "https://api.github.com/repos/sidneyts/W4ll-E-Releases/releases/latest";
+
             if (downloadButton) {
-                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                const platform = navigator.platform;
+                // Define o estado inicial como "Carregando..."
+                downloadButton.textContent = 'Carregando downloads...';
+                downloadButton.classList.add('disabled');
 
-                const winUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.8/W4ll-E-Setup-1.0.8.exe";
-                const macIntelUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.8/W4ll-E-1.0.8.dmg";
-                const macArmUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/download/v1.0.8/W4ll-E-1.0.8-arm64.dmg";
-                const defaultUrl = "https://github.com/sidneyts/W4ll-E-Releases/releases/latest";
+                fetch(githubApiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Erro na API do GitHub: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (!data.assets || data.assets.length === 0) {
+                            throw new Error("Nenhum arquivo encontrado no release mais recente.");
+                        }
 
-                let downloadUrl = defaultUrl;
+                        // Encontra os links de download nos assets do release
+                        const winAsset = data.assets.find(asset => asset.name.endsWith('.exe'));
+                        const macIntelAsset = data.assets.find(asset => asset.name.endsWith('.dmg') && !asset.name.includes('arm64'));
+                        const macArmAsset = data.assets.find(asset => asset.name.endsWith('-arm64.dmg'));
 
-                if (/Win/.test(platform)) {
-                    downloadUrl = winUrl;
-                }
-                else if (/Mac/.test(platform)) {
-                    if (/arm64|aarch64/i.test(navigator.userAgent)) {
-                         downloadUrl = macArmUrl;
-                         console.log("Detectado Mac ARM64");
-                    } else {
-                         downloadUrl = macIntelUrl;
-                         console.log("Detectado Mac Intel/x64");
-                    }
-                } else {
-                     console.log("Sistema operacional não detectado como Windows ou Mac, usando fallback.");
-                }
+                        const winUrl = winAsset ? winAsset.browser_download_url : null;
+                        const macIntelUrl = macIntelAsset ? macIntelAsset.browser_download_url : null;
+                        const macArmUrl = macArmAsset ? macArmAsset.browser_download_url : null;
+                        
+                        // Fallback genérico para a página de releases se algo falhar
+                        const defaultUrl = data.html_url || "https://github.com/sidneyts/W4ll-E-Releases/releases/latest";
 
-                console.log("URL de download definida:", downloadUrl);
-                downloadButton.href = downloadUrl;
+                        let detectedUrl = defaultUrl;
+                        let buttonText = "Baixar (Windows)";
 
+                        // Detecção do SO (mesma lógica de antes)
+                        const platform = navigator.platform;
+                        if (/Win/.test(platform)) {
+                            detectedUrl = winUrl || defaultUrl;
+                            buttonText = "Baixar para Windows";
+                        }
+                        else if (/Mac/.test(platform)) {
+                            if (/arm64|aarch64/i.test(navigator.userAgent)) {
+                                detectedUrl = macArmUrl || macIntelUrl || defaultUrl; // Fallback para Intel se ARM não existir
+                                buttonText = "Baixar para Mac (Apple Silicon)";
+                            } else {
+                                detectedUrl = macIntelUrl || defaultUrl;
+                                buttonText = "Baixar para Mac (Intel)";
+                            }
+                        } else {
+                             buttonText = "Ver todos downloads"; // SO não detectado
+                        }
+                        
+                        // Atualiza o botão
+                        downloadButton.href = detectedUrl;
+                        downloadButton.textContent = buttonText;
+                        downloadButton.classList.remove('disabled');
+                        
+                        // Se o botão não for um download direto (fallback), abre em nova aba
+                        if(detectedUrl === defaultUrl) {
+                            downloadButton.target = "_blank";
+                        } else {
+                            downloadButton.removeAttribute('target');
+                        }
+
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar releases do GitHub:', error);
+                        downloadError.textContent = 'Não foi possível carregar os downloads.';
+                        downloadButton.textContent = 'Ver no GitHub';
+                        downloadButton.href = 'https://github.com/sidneyts/W4ll-E-Releases/releases/latest';
+                        downloadButton.target = '_blank'; // Abre em nova aba como fallback
+                        downloadButton.classList.remove('disabled');
+                    });
             } else {
                 console.error("Botão de download não encontrado!");
             }
